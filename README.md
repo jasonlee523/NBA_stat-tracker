@@ -60,7 +60,7 @@ jjl625-final-project/db.js
 
 /list/slug - page for showing specific shopping list
 
-![list](documentation/link/slug.jpg)
+![list](documentation/link:slug.jpg)
 
 ## Site map
 

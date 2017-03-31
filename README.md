@@ -15,8 +15,6 @@ The application will store Users, Lists and Logs
 * users can have multiple lists
 * each list can have multiple player game logs
 
-(___TODO__: sample documents_)
-
 An Example User:
 
 ```javascript
@@ -44,7 +42,7 @@ An Example List with Embedded Logs:
 
 ## [Link to Commented First Draft Schema](db.js) 
 
-jjl625-final-project/db.js
+![list](/db.js)
 
 ## Wireframes
 

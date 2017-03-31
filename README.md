@@ -56,11 +56,11 @@ jjl625-final-project/db.js
 
 /list - page for showing all shopping lists
 
-![list](documentation/list.png)
+![list](documentation/list.jpg)
 
 /list/slug - page for showing specific shopping list
 
-![list](documentation/list-slug.png)
+![list](documentation/link/slug.jpg)
 
 ## Site map
 

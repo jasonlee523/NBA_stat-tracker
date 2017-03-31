@@ -86,6 +86,6 @@ An Example List with Embedded Logs:
 
 ## [Link to Initial Main Project File](app.js) 
 
-(___TODO__: create a skeleton Express application with a package.json, app.js, views folder, etc. ... and link to your initial app.js_)
+![list](app.js)
 
 ## Annotations / References Used

@@ -1,26 +1,19 @@
 The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
 
-(___TODO__: your project name_)
 
-# Shoppy Shoperson 
+# NBA Tracker 
 
 ## Overview
 
-(___TODO__: a brief one or two paragraph, high-level description of your project_)
-
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
-
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
+There are too many games to keep track of each day! I'm too busy to watch all the games, but I still love being updated with impressive statlines. NBA Tracker is a highly customizable app that allows users to save player game logs from each day. A user will have flexible options on which game logs to save. They can save according to player and/or restrictions in the statline (for ex: points > 30, rebounds > 10, assists > 10). These game logs will be saved to a list that accumulates them as the season goes on. NBA tracker will allow users to register and login to view their updated lists and to add or change restrictions to their lists.
 
 
 ## Data Model
 
-(___TODO__: a description of your application's data and their relationships to each other_) 
+The application will store Users, Lists and Logs
 
-The application will store Users, Lists and Items
-
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
+* users can have multiple lists
+* each list can have multiple player game logs
 
 (___TODO__: sample documents_)
 
@@ -28,21 +21,21 @@ An Example User:
 
 ```javascript
 {
-  username: "shannonshopper",
+  username: "NBATracker",
   hash: // a password hash,
   lists: // an array of references to List documents
 }
 ```
 
-An Example List with Embedded Items:
+An Example List with Embedded Logs:
 
 ```javascript
 {
   user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
+  name: "Russell Westbrook Triple Doubles",
+  logs: [
+    { player: "Russell Westbrook", date: "01/29/2017", points: 40},
+    { player: "Russell ", date: "3/29/2017", points: 57},
   ],
   createdAt: // timestamp
 }
@@ -51,7 +44,7 @@ An Example List with Embedded Items:
 
 ## [Link to Commented First Draft Schema](db.js) 
 
-(___TODO__: create a first draft of your Schemas in db.js and link to it_)
+jjl625-final-project/db.js
 
 ## Wireframes
 
@@ -59,7 +52,7 @@ An Example List with Embedded Items:
 
 /list/create - page for creating a new shopping list
 
-![list create](documentation/list-create.png)
+![list create](documentation/list-create2.jpg)
 
 /list - page for showing all shopping lists
 

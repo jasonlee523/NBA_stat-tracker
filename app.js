@@ -1,13 +1,12 @@
 require('./db');
-
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
 const app = express();
 
 const User = mongoose.model('User');
+const Player = mongoose.model('Player');
 // enable sessions
 const session = require('express-session');
 const sessionOptions = {
@@ -45,5 +44,26 @@ app.post('/register', (req, res) => {
     }
   });
 });
+app.get('/playerstats', (req, res) => {
+  res.render('playerStats');
+});
+app.post('/playerstats', (req, res) => {
+  new Player({
+    name: req.body.name,
+    player: req.body.player,
+    points: req.body.points,
+    rebounds: req.body.rebounds,
+    assists: req.body.assists
+  }).save(function(err) {
+    if(err) {
+      console.log(err);
+      res.send('an error has occured, please check the server output');
+      return;
+    }
+    else {
+      res.redirect('/playerstats');
+    }
+  })
+})
 
 app.listen(process.env.PORT || 3000);

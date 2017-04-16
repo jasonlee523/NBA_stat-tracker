@@ -4,7 +4,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
-
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var request = new XMLHttpRequest();
 const User = mongoose.model('User');
 const Player = mongoose.model('Player');
 // enable sessions
@@ -64,6 +65,6 @@ app.post('/playerstats', (req, res) => {
       res.redirect('/playerstats');
     }
   })
-})
+});
 
 app.listen(process.env.PORT || 3000);

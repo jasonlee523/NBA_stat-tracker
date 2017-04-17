@@ -1,4 +1,5 @@
 require('./db');
+const NBA = require('nba');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -8,6 +9,7 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var request = new XMLHttpRequest();
 const User = mongoose.model('User');
 const Player = mongoose.model('Player');
+var player1;
 // enable sessions
 const session = require('express-session');
 const sessionOptions = {
@@ -45,10 +47,10 @@ app.post('/register', (req, res) => {
     }
   });
 });
-app.get('/playerstats', (req, res) => {
-  res.render('playerStats');
+app.get('/create', (req, res) => {
+  res.render('create');
 });
-app.post('/playerstats', (req, res) => {
+app.post('/create', (req, res) => {
   new Player({
     name: req.body.name,
     player: req.body.player,
@@ -62,9 +64,19 @@ app.post('/playerstats', (req, res) => {
       return;
     }
     else {
-      res.redirect('/playerstats');
+      player1 = req.body.player;
+      res.redirect('/stats');
     }
   })
 });
+app.get('/stats', (req, res) => {
+  var player_ = NBA.findPlayer(player1);
+  var numbers = NBA.stats.playerInfo({ PlayerID: player_.playerId }).then(x);
 
+  function x(a) {
+    var b = a.playerHeadlineStats[0];
+    console.log(b);
+    res.render('stats', {points: b.pts, assists: b.ast, rebounds: b.reb});
+  }
+});
 app.listen(process.env.PORT || 3000);

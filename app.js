@@ -53,7 +53,7 @@ app.get('/create', (req, res) => {
 app.post('/create', (req, res) => {
   new Player({
     name: req.body.name,
-    player: req.body.player,
+    athlete: req.body.athlete,
     points: req.body.points,
     rebounds: req.body.rebounds,
     assists: req.body.assists
@@ -64,11 +64,24 @@ app.post('/create', (req, res) => {
       return;
     }
     else {
-      player1 = req.body.player;
+      player1 = req.body.athlete;
       res.redirect('/stats');
     }
   })
 });
+
+app.post('/ajax1',(req,res) => {
+  var player1 = Object.keys(req.body)[0];
+  var player_ = NBA.findPlayer(player1);
+  var numbers = NBA.stats.playerInfo({ PlayerID: player_.playerId }).then(sendBack);
+
+  function sendBack(a) {
+    var b = a.playerHeadlineStats[0];
+    res.send(b);
+  }
+
+});
+
 app.get('/stats', (req, res) => {
   var player_ = NBA.findPlayer(player1);
   var numbers = NBA.stats.playerInfo({ PlayerID: player_.playerId }).then(x);
@@ -79,4 +92,52 @@ app.get('/stats', (req, res) => {
     res.render('stats', {points: b.pts, assists: b.ast, rebounds: b.reb});
   }
 });
+app.get('/view-players', (req, res) => {
+  Player.find(function(err, players) {
+    console.log(players);
+    res.render('ajax', {
+      players: players
+    });
+  });
+});
+function ajaxPost(form, callback) {
+    var url = form.action,
+        xhr = new XMLHttpRequest();
+
+    //This is a bit tricky, [].fn.call(form.elements, ...) allows us to call .fn
+    //on the form's elements, even though it's not an array. Effectively
+    //Filtering all of the fields on the form
+    var params = [].filter.call(form.elements, function(el) {
+        //Allow only elements that don't have the 'checked' property
+        //Or those who have it, and it's checked for them.
+        return typeof(el.checked) === 'undefined' || el.checked;
+        //Practically, filter out checkboxes/radios which aren't checekd.
+    })
+    .filter(function(el) { return !!el.name; }) //Nameless elements die.
+    .filter(function(el) { return el.disabled; }) //Disabled elements die.
+    .map(function(el) {
+        //Map each field into a name=value string, make sure to properly escape!
+        return encodeURIComponent(el.name) + '=' + encodeURIComponent(el.value);
+    }).join('&'); //Then join all the strings by &
+
+    xhr.open("POST", url);
+    // Changed from application/x-form-urlencoded to application/x-form-urlencoded
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    //.bind ensures that this inside of the function is the XHR object.
+    xhr.onload = callback.bind(xhr);
+
+    //All preperations are clear, send the request!
+    xhr.send(params);
+}
+/*function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "ajax_info.txt", true);
+  xhttp.send();
+}*/
 app.listen(process.env.PORT || 3000);

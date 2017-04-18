@@ -1,0 +1,37 @@
+<body>
+<form >
+  <!-- {{#each players}}
+  <input type="button" value={{{this.athlete}}} onclick="ajaxPost(this.athlete)">
+  {{/each}} -->
+  <input id="input1" ></input><button type="button" onclick="ajaxPost(this)">Go!</button>
+</form>
+
+<h1>Player Name: <h1><h1 id="playerName">player</h1>
+<h5>Points: </h5><h5 id="points"></h5>
+<h5>Assists: </h5> <h5 id="assists"></h5>
+<h5>Rebounds: <h5><h5 id="rebounds"></h5>
+</body>
+<script src ="/javascripts/function.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script>
+  // var data;
+  // var name = NBA.findPlayer(data);
+  // var stats = NBA.stats.playerInfo({PlayerID: name.playerID});
+
+  function ajaxPost(){
+    // console.log("value: ");
+    var playerName = $("#input1").val();
+    $.post('/ajax1',playerName).done(function(data, textStatus, jqXHR){
+      var mydata = jqXHR.responseText;
+      var jsonData = JSON.parse(mydata);
+      $('#playerName').text(jsonData["playerName"]);
+      $('#points').text(jsonData["pts"]);
+      $('#assists').text(jsonData["ast"]);
+      $('#rebounds').text(jsonData["reb"]);
+
+    });
+    // console.log();
+    // console.log(Object.keys(returnVal));
+  }
+
+</script>

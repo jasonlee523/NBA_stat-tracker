@@ -9,7 +9,7 @@ const User = new mongoose.Schema({
 const Player = new mongoose.Schema({
   name: String,
   postedBy: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-  player: String,
+  athlete: String,
   points: Number,
   rebounds: Number,
   assists: Number

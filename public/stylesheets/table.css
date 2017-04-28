@@ -1,0 +1,21 @@
+table {
+	border-collapse: collapse;
+
+}
+
+td, th {
+	border: 1px solid #555;
+	text-align: left;
+	padding: 5px;
+}
+
+/* color every other row */
+tr:nth-child(2n) {
+	background-color: #eee;
+}
+
+th {
+	font-weight:bold;
+	background-color: #000;
+	color: #fff;
+}

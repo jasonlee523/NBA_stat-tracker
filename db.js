@@ -2,31 +2,29 @@ const mongoose = require('mongoose');
 
 // A User will be able to log in
 const User = new mongoose.Schema({
-  username: String,
-  hash: String
-  //lists: // an array of references to List documents
+  fb: {
+		id: String,
+		access_token: String,
+		firstName: String,
+		lastName: String,
+		email: String,
+	}
 });
 const Player = new mongoose.Schema({
   name: String,
-  postedBy: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-  athlete: String,
   points: Number,
-  rebounds: Number,
-  assists: Number
+  assists: Number,
+  rebounds: Number
 });
-// A list is created by the user to filter out
-// nba game logs according to restrictions
-/*const List = new mongoose.Schema({
-  user: // a reference to a User object
-  name: // named by user,
-  logs: [
-    // game logs taken from NBA API
-  ],
-  createdAt: // timestamp
-})*/
+const List = new mongoose.Schema({
+  name: String,
+  userId: String,
+  players: [Player]
+});
 
 mongoose.model('User', User);
 mongoose.model('Player', Player);
+mongoose.model('List', List);
 // is the environment variable, NODE_ENV, set to PRODUCTION?
 if (process.env.NODE_ENV === 'PRODUCTION') {
  // if we're in PRODUCTION mode, then read the configration from a file

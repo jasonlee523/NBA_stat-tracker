@@ -1,37 +1,86 @@
-<body>
-<form >
-  <!-- {{#each players}}
-  <input type="button" value={{{this.athlete}}} onclick="ajaxPost(this.athlete)">
-  {{/each}} -->
-  <input id="input1" ></input><button type="button" onclick="ajaxPost(this)">Go!</button>
-</form>
+<form action="" method="get">
+  <b>Set filters:</b></br></br>
+  Points: <input type="number" id="pt" name="pt" value="{{pt}}"></br>
+  Assists: <input type="number" id="ast" name="ast" value="{{ast}}"></br>
+  Rebounds: <input type="number" id="reb" name="reb" value="{{reb}}">
+  <input id="filterBtn" type="submit" value="Filter">
+</form></br>
 
-<h1>Player Name: <h1><h1 id="playerName">player</h1>
-<h5>Points: </h5><h5 id="points"></h5>
-<h5>Assists: </h5> <h5 id="assists"></h5>
-<h5>Rebounds: <h5><h5 id="rebounds"></h5>
-</body>
-<script src ="/javascripts/function.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<h2>Table of Players:</h2>
+<table>
+  <link rel = "stylesheet" href='/stylesheets/table.css'></a>
+  <thead>
+    <th>Player</th>
+    <th>Points</th>
+    <th>Assists</th>
+    <th>Rebounds</th>
+  </thead>
+  <tbody id="player-list">
+    {{#each players}}
+    <tr>
+      <td>{{name}}</td>
+      <td>{{points}}</td>
+      <td>{{assists}}</td>
+      <td>{{rebounds}}</td>
+    </tr>
+    {{/each}}
+    <tr>
+      <td>Totals</td>
+      <td>{{pointSum}}</td>
+      <td>{{assistSum}}</td>
+      <td>{{reboundSum}}</td>
+    </tr>
+  </tbody>
+</table>
+</br></br>
+
+<a href='/create'>Add a player</a></br>
+<a href='/delete'>Remove a player</a>
+
 <script>
-  // var data;
-  // var name = NBA.findPlayer(data);
-  // var stats = NBA.stats.playerInfo({PlayerID: name.playerID});
-
-  function ajaxPost(){
-    // console.log("value: ");
-    var playerName = $("#input1").val();
-    $.post('/ajax1',playerName).done(function(data, textStatus, jqXHR){
-      var mydata = jqXHR.responseText;
-      var jsonData = JSON.parse(mydata);
-      $('#playerName').text(jsonData["playerName"]);
-      $('#points').text(jsonData["pts"]);
-      $('#assists').text(jsonData["ast"]);
-      $('#rebounds').text(jsonData["reb"]);
-
-    });
-    // console.log();
-    // console.log(Object.keys(returnVal));
-  }
+document.addEventListener('DOMContentLoaded', init);
+var filterButton = document.getElementById('filterBtn');
+function init() {
+	console.log('init');
+	filterButton.addEventListener('click', handleClick);
+}
+function handleClick(eve) {
+  eve.preventDefault();
+	var req = new XMLHttpRequest(),
+	url = 'http://localhost:3000/api/view-players'+'?pts='+document.getElementById('pt').value+'&ast='+document.getElementById('ast').value+'&reb='+document.getElementById('reb').value;
+	req.open('GET', url, true);
+	req.addEventListener('load', function() {
+		if(this.status >= 200 && this.status < 400) {
+			var data = JSON.parse(this.responseText),
+      playerList = document.querySelector('tBody');
+      var tBody = document.createElement("tbody");
+      data.forEach(function(ele) {
+        if(ele !== null) {
+          var tr = document.createElement("tr");
+          tr.appendChild(document.createElement('td')).textContent = ele.name;
+          tr.appendChild(document.createElement('td')).textContent = ele.points;
+          tr.appendChild(document.createElement('td')).textContent = ele.assists;
+          tr.appendChild(document.createElement('td')).textContent = ele.rebounds;
+				  tBody.appendChild(tr);
+        }
+			});
+      var pSum = 0; var aSum = 0; var rSum = 0;
+      data.forEach(function(ele) {
+        if(ele !== null) {
+          pSum += ele.points; aSum += ele.assists; rSum += ele.rebounds;
+        }
+      })
+      var tr2 = document.createElement('tr');
+      tr2.appendChild(document.createElement('td')).textContent = 'Totals';
+      tr2.appendChild(document.createElement('td')).textContent = pSum;
+      tr2.appendChild(document.createElement('td')).textContent = aSum;
+      tr2.appendChild(document.createElement('td')).textContent = rSum;
+      tBody.appendChild(tr2);
+      console.log(pSum);
+      document.querySelector('table').replaceChild(tBody, playerList);
+		}
+	});
+	req.send();
+}
 
 </script>

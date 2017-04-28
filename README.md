@@ -5,15 +5,15 @@ The content below is an example project proposal / requirements document. Replac
 
 ## Overview
 
-There are too many games to keep track of each day! I'm too busy to watch all the games, but I still love being updated with impressive statlines. NBA Tracker is a highly customizable app that allows users to save player game logs from each day. A user will have flexible options on which game logs to save. They can save according to player and/or restrictions in the statline (for ex: points > 30, rebounds > 10, assists > 10). These game logs will be saved to a list that accumulates them as the season goes on. NBA tracker will allow users to register and login to view their updated lists and to add or change restrictions to their lists.
+There are too many player statlines to keep track of! I'm too busy to constantly check, but I still love being updated with impressive statlines. NBA Tracker is a customizable app that allows users to save player statlines. A user will have flexible options on which players to choose, and the ability to filter statlines (for ex: points > 30, rebounds > 10, assists > 10). These statlines will be saved to a list where the player can add, delete, or filter. NBA tracker will allow users to register and login to view their lists and to add or change restrictions to their lists.
 
 
 ## Data Model
 
-The application will store Users, Lists and Logs
+The application will store Users, Lists and Players
 
-* users can have multiple lists
-* each list can have multiple player game logs
+* each user has a unique list
+* each list stores multiples players
 
 An Example User:
 
@@ -68,20 +68,18 @@ An Example List with Embedded Logs:
 
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
-3. as a user, I can create a new list based on filters
-4. as a user, I can view all of the lists I've created in one single list
-5. as a user, I can change the filters of an existing list
+3. as a user, I can add a player to the list
+4. as a user, I can delete a player to the list
+5. as a user, I can change the filters on my list
 
 ## Research Topics
 
-* (5 points) Integrate user authentication
+* (6 points) Integrate user authentication
     * I will use FB Connect to implement user authentication
 * (2 points) Use external API NBA Stats
     * I will use this API to search for stats and filter them out into lists
-* (2 points) CSS Framework
-    * I will use bootstrap and foundation to spice up the site
 
-9 points total out of 8 required points
+8 points total out of 8 required points
 
 
 ## [Link to Initial Main Project File](app.js) 

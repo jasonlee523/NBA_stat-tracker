@@ -47,7 +47,7 @@ function init() {
 function handleClick(eve) {
   eve.preventDefault();
 	var req = new XMLHttpRequest(),
-	url = 'http://localhost:3000/api/view-players'+'?pts='+document.getElementById('pt').value+'&ast='+document.getElementById('ast').value+'&reb='+document.getElementById('reb').value;
+	url = 'http://linserv1.cims.nyu.edu:15915/api/view-players'+'?pts='+document.getElementById('pt').value+'&ast='+document.getElementById('ast').value+'&reb='+document.getElementById('reb').value;
 	req.open('GET', url, true);
 	req.addEventListener('load', function() {
 		if(this.status >= 200 && this.status < 400) {

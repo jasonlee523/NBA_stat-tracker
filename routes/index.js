@@ -3,9 +3,9 @@ var router = express.Router();
 var NBA = require('nba');
 var player1;
 var mongoose = require('mongoose');
-const User = mongoose.model('User');
-const Player = mongoose.model('Player');
-const List = mongoose.model('List');
+var User = mongoose.model('User');
+var Player = mongoose.model('Player');
+var List = mongoose.model('List');
 var isAuthenticated = function (req, res, next) {
 	if (req.isAuthenticated())
 		return next();

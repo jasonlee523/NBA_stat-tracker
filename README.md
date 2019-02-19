@@ -1,5 +1,3 @@
-The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
-
 
 # NBA Tracker 
 
@@ -39,31 +37,6 @@ An Example List with Embedded Logs:
 }
 ```
 
-
-## [Link to Commented First Draft Schema](db.js) 
-
-![list](/db.js)
-
-## Wireframes
-
-(___TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
-
-/list/create - page for creating a new shopping list
-
-![list create](documentation/list-create2.jpg)
-
-/list - page for showing all shopping lists
-
-![list](documentation/list.jpg)
-
-/list/slug - page for showing specific shopping list
-
-![list](documentation/link:slug.jpg)
-
-## Site map
-
-![list](documentation/map.jpg)
-
 ## User Stories or Use Cases
 
 1. as non-registered user, I can register a new account with the site
@@ -72,18 +45,6 @@ An Example List with Embedded Logs:
 4. as a user, I can delete a player to the list
 5. as a user, I can change the filters on my list
 
-## Research Topics
 
-* (6 points) Integrate user authentication
-    * I will use FB Connect to implement user authentication
-* (2 points) Use external API NBA Stats
-    * I will use this API to search for stats and filter them out into lists
-
-8 points total out of 8 required points
-
-
-## [Link to Initial Main Project File](app.js) 
-
-![list](app.js)
-
-## Annotations / References Used
+    * Use FB Connect to implement user authentication
+    * Use NBA API to search for stats and filter them out into lists
